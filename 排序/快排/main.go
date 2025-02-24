@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func partition(arr []int, left, right int) int {
 	pivot := arr[left]
@@ -41,9 +44,42 @@ func QuickSort(arr []int, left, right int) {
 	}
 }
 
+type Person struct {
+	Name string
+	Age  int
+}
+
+type ByAge []Person
+
+func (a ByAge) Len() int           { return len(a) }
+func (a ByAge) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a ByAge) Less(i, j int) bool { return a[i].Age < a[j].Age }
+
 func main() {
 	var arr = []int{11, 8, 3, 9, 7, 1, 2, 5}
 	QuickSort(arr, 0, len(arr)-1)
 
 	fmt.Println(arr)
+
+	var arr2 = []int{1, 2, 3, 5, 8, 10}
+	QuickSort(arr, 0, len(arr2)-1)
+
+	people := []Person{
+		{"Bob", 31},
+		{"John", 42},
+		{"Michael", 17},
+		{"Jenny", 26},
+		{"Jenny", 26},
+		{"Jenny", 26},
+		{"Jenny", 26},
+		{"Jenny", 26},
+		{"Jenny", 26},
+		{"Jenny", 26},
+		{"Jenny", 26},
+		{"Jenny", 26},
+		{"Jenny", 26},
+		{"Jenny", 26},
+	}
+
+	sort.Sort(ByAge(people))
 }
